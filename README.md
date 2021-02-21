@@ -1,1 +1,1 @@
-# -Kubernetes-Up-and-Running
+# Kubernetes-Up-and-Running

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpaca-prod
+  labels:
+    app: alpaca
+    ver: 1
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: alpaca
+  template:
+    metadata:
+      labels:
+        app: alpaca
+    spec:
+      containers:
+      - name: alpaca
+        image: gcr.io/kuar-demo/kuard-amd64:blue
+        ports:
+        - containerPort: 8080
+# $ kubectl run alpaca-prod \
+# --image=gcr.io/kuar-demo/kuard-amd64:blue \
+# --replicas=3 \
+# --port=8080 \
+# --labels="ver=1,app=alpaca,env=prod"
+# $ kubectl expose deployment alpaca-prod
+# $ kubectl run bandicoot-prod \
+# --image=gcr.io/kuar-demo/kuard-amd64:green \
+# --replicas=2 \
+# --port=8080 \
+# --labels="ver=2,app=bandicoot,env=prod"
+# $ kubectl expose deployment bandicoot-prod
+# $ kubectl get services -o wide
